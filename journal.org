@@ -1,0 +1,26 @@
+* Findings
+* Journal
+** Week 2 feb 2015
+*** Things done
+ - added some cross-process MCer/MCed communications (socket based)
+ - fixed MCer/MCed synchronisation issues
+*** Questions
+ - MC_automaton_new_propositional_symbol This should probably be
+   handled in the MCer but this function exposes a callback function
+   for evaluating a symbol. What should we do about this? Kindly ask
+   the MCed to execute the function(s) for us?
+*** Work Planed [0/1]
+**** TODO propert handling of the message on the server side
+ - Some message handling is currently stubbed in the MCer.
+**** TODO add missing cross-process MCer/MCed communication
+ - ask the MCed to continue its execution
+ - inform the MCer that a decision point has been reched
+**** TODO start moving some MC algorithms to the MCer process
+ - Once the basic communication between the MCer/MCed is in place, we can
+**** TODO separate source code used by the MCer and the MCed in different files/folders
+ - Separing the code in two distinct libraries will ensure that we do not symbols in the wrong process.
+* Letter to the Next Guy
+* Abbreviations
+ - MC: model-checking, model-check
+ - MCer: model-checker
+ - MCed: model-checked application

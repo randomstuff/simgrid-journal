@@ -36,7 +36,7 @@
  - Merge commits from master
 *** Questions
  - The "easy", long, generic part has been done. What remains is the:
-   - the algorithm-specifi parts (liveness, safety, comm. determinism);
+   - the algorithm-specific parts (liveness, safety, comm. determinism);
    - some support code which relies eavily on the SIMIX data
      structures;
    the remaining boring part is to find a generic, simple, readable,

@@ -9,8 +9,8 @@
    handled in the MCer but this function exposes a callback function
    for evaluating a symbol. What should we do about this? Kindly ask
    the MCed to execute the function(s) for us?
-*** Work Planed [0/1]
-**** TODO propert handling of the message on the server side
+*** Work Planed [1/4]
+**** DONE proper handling of the message on the server side
  - Some message handling is currently stubbed in the MCer.
 **** TODO add missing cross-process MCer/MCed communication
  - ask the MCed to continue its execution
@@ -19,6 +19,31 @@
  - Once the basic communication between the MCer/MCed is in place, we can
 **** TODO separate source code used by the MCer and the MCed in different files/folders
  - Separing the code in two distinct libraries will ensure that we do not symbols in the wrong process.
+** Week 9 feb 2015
+*** Things done
+ - More cross process MCer/MCer communications
+ - MCer-side symbol evaluations (for Promela formulas) implemented as
+   variables in the MCed. The more general case where the promula
+   formula is implemented as a client-side callback is not implemented
+   yet: we would have to trigger the function evaluation from the
+   MCer.
+ - Partial separation of the MCed API vs MCer API
+ - Make the file descriptor snapshoting/restoration logic optional and
+   disabled by default: this is often not necessary in our examples
+   and it is not implemented (yet) in the split-process mode. The
+   split-process implementation needs to be implemented on the MCed
+   side with some form on MCer/MCed communication.
+ - Merge commits from master
+*** Questions
+ - The "easy", long, generic part has been done. What remains is the:
+   - the algorithm-specifi parts (liveness, safety, comm. determinism);
+   - some support code which relies eavily on the SIMIX data
+     structures;
+   the remaining boring part is to find a generic, simple, readable,
+   lightweight way to tap into the SIMIX data structures from the
+   MCer.
+*** Work Planed
+Same as before and.
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

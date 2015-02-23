@@ -14,11 +14,14 @@
  - Some message handling is currently stubbed in the MCer.
 **** TODO add missing cross-process MCer/MCed communication
  - ask the MCed to continue its execution
- - inform the MCer that a decision point has been reched
+ - inform the MCer that a decision point has been reached
 **** TODO start moving some MC algorithms to the MCer process
- - Once the basic communication between the MCer/MCed is in place, we can
+ - Once the basic communication between the MCer/MCed is in place, we
+   can move specific MC algorithms (safety, liveness, comm
+   determinism) on the server side.
 **** TODO separate source code used by the MCer and the MCed in different files/folders
- - Separing the code in two distinct libraries will ensure that we do not symbols in the wrong process.
+ - Separing the code in two distinct libraries will ensure that we do
+   not access symbols/variables in the wrong process.
 ** Week 9 feb 2015
 *** Things done
  - More cross process MCer/MCer communications
@@ -35,7 +38,7 @@
    side with some form on MCer/MCed communication.
  - Merge commits from master
 *** Questions
- - The "easy", long, generic part has been done. What remains is the:
+ - The "easy", long, generic part has been done. What remains is:
    - the algorithm-specific parts (liveness, safety, comm. determinism);
    - some support code which relies eavily on the SIMIX data
      structures;

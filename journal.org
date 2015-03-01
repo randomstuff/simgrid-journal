@@ -47,6 +47,21 @@
    MCer.
 *** Work Planed
 Same as before and.
+** Week 23 feb 2015
+*** Things done
+- Remote access to smx_process, simcalls, host names (cached).
+- Integration of this modification in in many places.
+- (wip) Move the safety algorithm in the MCer process
+*** Questions
+- Currently all thos remote access are implemented by reading in the
+  MCed process. Might be cleaner to have the MCed process signal the
+  MCer process of the changes (use message passing instead of reading
+  in the MCed process).
+*** Work Planed [/]
+**** TODO Remote access to proces name
+**** TODO Remote access to synchro
+**** TODO Finish integration of thos modification in all the code
+**** TODO Move the safety algorithm in the MCer process
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

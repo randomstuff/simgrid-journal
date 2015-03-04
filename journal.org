@@ -1,4 +1,5 @@
 * Findings
+http://www.gabriel.urdhr.fr/tags/simgrid/
 * Journal
 ** Week 2 feb 2015
 *** Things done

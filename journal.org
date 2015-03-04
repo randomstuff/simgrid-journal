@@ -15,11 +15,14 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
  - Some message handling is currently stubbed in the MCer.
 **** TODO add missing cross-process MCer/MCed communication
  - ask the MCed to continue its execution
- - inform the MCer that a decision point has been reched
+ - inform the MCer that a decision point has been reached
 **** TODO start moving some MC algorithms to the MCer process
- - Once the basic communication between the MCer/MCed is in place, we can
+ - Once the basic communication between the MCer/MCed is in place, we
+   can move specific MC algorithms (safety, liveness, comm
+   determinism) on the server side.
 **** TODO separate source code used by the MCer and the MCed in different files/folders
- - Separing the code in two distinct libraries will ensure that we do not symbols in the wrong process.
+ - Separing the code in two distinct libraries will ensure that we do
+   not access symbols/variables in the wrong process.
 ** Week 9 feb 2015
 *** Things done
  - More cross process MCer/MCer communications
@@ -36,7 +39,7 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
    side with some form on MCer/MCed communication.
  - Merge commits from master
 *** Questions
- - The "easy", long, generic part has been done. What remains is the:
+ - The "easy", long, generic part has been done. What remains is:
    - the algorithm-specific parts (liveness, safety, comm. determinism);
    - some support code which relies eavily on the SIMIX data
      structures;
@@ -45,6 +48,21 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
    MCer.
 *** Work Planed
 Same as before and.
+** Week 23 feb 2015
+*** Things done
+- Remote access to smx_process, simcalls, host names (cached).
+- Integration of this modification in in many places.
+- (wip) Move the safety algorithm in the MCer process
+*** Questions
+- Currently all thos remote access are implemented by reading in the
+  MCed process. Might be cleaner to have the MCed process signal the
+  MCer process of the changes (use message passing instead of reading
+  in the MCed process).
+*** Work Planed [/]
+**** TODO Remote access to proces name
+**** TODO Remote access to synchro
+**** TODO Finish integration of thos modification in all the code
+**** TODO Move the safety algorithm in the MCer process
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

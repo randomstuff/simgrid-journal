@@ -63,6 +63,18 @@ Same as before and.
 **** TODO Remote access to synchro
 **** TODO Finish integration of thos modification in all the code
 **** TODO Move the safety algorithm in the MCer process
+** Week 2 march 2015
+*** Things done
+- Fix bugs from previous weeks. The new code was not completely active
+  so I found out some bugs. Rewrote the commits in order to have a
+  clean history. There is still some work to be done around this.
+*** Questions
+- s_mc_comm_pattern use the host *name* as src_host/dst_host. It might
+  be better (more efficient) to use some sort of host identifier
+  instead. AFAIK, we don't really have a host identifier. We can
+  either use the host name of the address of the host process.
+*** Work Planed [/]
+**** TODO Remote access to host name
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

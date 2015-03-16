@@ -58,10 +58,10 @@ Same as before and.
   MCed process. Might be cleaner to have the MCed process signal the
   MCer process of the changes (use message passing instead of reading
   in the MCed process).
-*** Work Planed [/]
-**** TODO Remote access to proces name
-**** TODO Remote access to synchro
-**** TODO Finish integration of thos modification in all the code
+*** Work Planed [2/4]
+**** DONE Remote access to proces name
+**** DONE Remote access to synchro
+**** TODO Finish integration of those modification in all the code
 **** TODO Move the safety algorithm in the MCer process
 ** Week 2 march 2015
 *** Things done
@@ -73,8 +73,21 @@ Same as before and.
   be better (more efficient) to use some sort of host identifier
   instead. AFAIK, we don't really have a host identifier. We can
   either use the host name of the address of the host process.
-*** Work Planed [/]
-**** TODO Remote access to host name
+*** Work Planed [1/1]
+**** DONE Remote access to host name
+** Week 9 march 2015
+*** Things done
+- Utility functions to read MCed dynar
+- Remote access to SIMIX structures
+  - simcall_comm_wait__get__comm(r)
+  - simcall_comm_test__get__comm(r)
+  - simcall_comm_waitany__get__comms(r)
+  - simcall_comm_testany__get__comms(r)
+  - ...
+- Complete remote memory access in mc_state.c
+*** Questions
+*** Work Planed
+**** TOTO Remote memory access in mc_request.c
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

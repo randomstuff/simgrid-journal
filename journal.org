@@ -54,14 +54,14 @@ Same as before and.
 - Integration of this modification in in many places.
 - (wip) Move the safety algorithm in the MCer process
 *** Questions
-- Currently all thos remote access are implemented by reading in the
-  MCed process. Might be cleaner to have the MCed process signal the
-  MCer process of the changes (use message passing instead of reading
-  in the MCed process).
-*** Work Planed [2/4]
+- Currently all those remote accesses are implemented by reading in
+  the MCed process. It might be cleaner to have the MCed process
+  signal the MCer process of the changes (use message passing instead
+  of reading in the MCed process).
+*** Work Planed [3/4]
 **** DONE Remote access to proces name
 **** DONE Remote access to synchro
-**** TODO Finish integration of those modification in all the code
+**** DONE Finish integration of those modification in all the code
 **** TODO Move the safety algorithm in the MCer process
 ** Week 2 march 2015
 *** Things done
@@ -87,7 +87,21 @@ Same as before and.
 - Complete remote memory access in mc_state.c
 *** Questions
 *** Work Planed
-**** TOTO Remote memory access in mc_request.c
+**** DONE Remote memory access in mc_request.c
+** Week 16 march 2015
+*** Things done
+- Finish to fix all (known) remote memory access issues. Some of them
+  probably remain.
+*** Questions
+ - Currently a quite dumb version approach si sued where most of the
+   data is read from the other process memory on demande. Will the
+   performance impact be negligeable? Do we want to be more clever
+   (use caching? fetching complexe data structures with logic on the
+   MCed side).
+*** Work Planed
+**** TODO Safety algorithm on the MCer side
+ - This was already on the TODO list of week 23 feb 2015. I will
+   probably find remaining cross process access issues in the process.
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

@@ -102,6 +102,51 @@ Same as before and.
 **** TODO Safety algorithm on the MCer side
  - This was already on the TODO list of week 23 feb 2015. I will
    probably find remaining cross process access issues in the process.
+** Week 16 march 2015
+*** Things done
+*** Questions
+**** MCer/MCed communication
+The wip version is littered direct reads by the MCer in the MCed address space:
+ - reading remote data structures;
+ - following pointers in the remote proces;
+ - iteration on dynars and swags.
+
+The MCer does not write in the MCed address space (only for snapshot
+restoration): the communication if based on message passing.
+
+Directly reading in the MCed memory from the MCer is bad:
+ - ugly;
+ - not maintainable;
+ - tight coupling of the MCer with the MCed (but nearly no coupling of
+   the MCed with the MCer -- the MCed is nearly unaware the MCer).
+
+What we currently read from the MCed memory:
+  - process list
+    - name
+    - name of the host
+    - simcalls and its associated communications
+      - processes (sender, receiver, process waiting on a mutex)
+      - content of the buffers
+      - MPI tags
+  - memory state
+    - state of the heap
+    - state of the SMPI privatisation
+      - which segment is currently mapped in memory
+      - position of the SMPI privatisations segments
+
+The process list, process name, host name, simcalls access is
+currently wrapped in a not-so-ugly API. Most of the ugliness is
+currently related to the communications associated with the simcalls
+which is not wrapped in a nicer API.
+
+How do we want to handle this?
+ - move all the ugliness in one place and provide a cleaner API for
+   consumption by the rest of the MCer code?
+ - use shared memory in order to expose a cleaner view (to de defined)
+   of the state of the MCed to the MCer?
+ - add more messages (to de defined) to synchronize a cleaner view
+   of the state.
+*** Work Planed
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

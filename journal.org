@@ -102,8 +102,10 @@ Same as before and.
 **** TODO Safety algorithm on the MCer side
  - This was already on the TODO list of week 23 feb 2015. I will
    probably find remaining cross process access issues in the process.
-** Week 16 march 2015
+** Week 23 march 2015
 *** Things done
+ - Port the basix MC safety algorithm in multi-process.
+   Some things still needs to be fixed however (snapshot/restore).
 *** Questions
 **** MCer/MCed communication
 The wip version is littered direct reads by the MCer in the MCed address space:
@@ -146,7 +148,15 @@ How do we want to handle this?
    of the state of the MCed to the MCer?
  - add more messages (to de defined) to synchronize a cleaner view
    of the state.
+**** Isolation of the simulated process?
+ - Shall we move towards a design were each simulated process is
+   isolated in its own process?
 *** Work Planed
+**** TODO Fix snapshoting logic and make it work in safety
+**** TODO Test and check for remaining issues in the safety path
+ - Check all the options
+ - Check on different problems and check if we find the same results.
+**** TODO Implement the liveness in multi-process
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

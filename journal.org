@@ -93,8 +93,8 @@ Same as before and.
 - Finish to fix all (known) remote memory access issues. Some of them
   probably remain.
 *** Questions
- - Currently a quite dumb version approach si sued where most of the
-   data is read from the other process memory on demande. Will the
+ - Currently a quite dumb version approach is used where most of the
+   data is read from the other process memory on demand. Will the
    performance impact be negligeable? Do we want to be more clever
    (use caching? fetching complexe data structures with logic on the
    MCed side).
@@ -114,7 +114,7 @@ The wip version is littered direct reads by the MCer in the MCed address space:
  - iteration on dynars and swags.
 
 The MCer does not write in the MCed address space (only for snapshot
-restoration): the communication if based on message passing.
+restoration): the communication is based on message passing.
 
 Directly reading in the MCed memory from the MCer is bad:
  - ugly;
@@ -147,16 +147,17 @@ How do we want to handle this?
  - use shared memory in order to expose a cleaner view (to de defined)
    of the state of the MCed to the MCer?
  - add more messages (to de defined) to synchronize a cleaner view
-   of the state.
+   of the state?
 **** Isolation of the simulated process?
  - Shall we move towards a design were each simulated process is
-   isolated in its own process?
+   isolated in its own process? 
+   - [Mt] that would help for SMPI anyway
 *** Work Planed
 **** TODO Fix snapshoting logic and make it work in safety
 **** TODO Test and check for remaining issues in the safety path
  - Check all the options
  - Check on different problems and check if we find the same results.
-**** TODO Implement the liveness in multi-process
+**** TODO Implement the liveness in cross-process
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

@@ -86,7 +86,7 @@ Same as before and.
   - ...
 - Complete remote memory access in mc_state.c
 *** Questions
-*** Work Planed
+*** Work Planed [1/1]
 **** DONE Remote memory access in mc_request.c
 ** Week 16 march 2015
 *** Things done
@@ -98,8 +98,8 @@ Same as before and.
    performance impact be negligeable? Do we want to be more clever
    (use caching? fetching complexe data structures with logic on the
    MCed side).
-*** Work Planed
-**** TODO Safety algorithm on the MCer side
+*** Work Planed [1/1]
+**** DONE Safety algorithm on the MCer side
  - This was already on the TODO list of week 23 feb 2015. I will
    probably find remaining cross process access issues in the process.
 ** Week 23 march 2015
@@ -158,6 +158,30 @@ How do we want to handle this?
  - Check all the options
  - Check on different problems and check if we find the same results.
 **** TODO Implement the liveness in cross-process
+*** Work Planed [1/3]
+**** DONE Fix snapshoting logic and make it work in safety
+**** TODO Test and check for remaining issues in the safety path
+ - Check all the options
+ - Check on different problems and check if we find the same results.
+**** TODO Implement the liveness in multi-process
+** Week 29 march 2015
+*** Things done
+- Find why the state comparison code does not work in the new version,
+  it was disabled by some other code.
+- Fix the state comparison code in cross process mode.
+- In the process, I found older regressions in the state comparison
+  results: commit 03d36345c4247a907709b86c189a53f5f85bea88 brings an
+  increased number of states. Some states which were taken as similar
+  are now different. The modification responsible for this difference
+  can be traced back to the `xbt_cfg_register()` calls which leads to
+  new instances of "Local variable comm () in frame
+  simcall_BODY_comm_wait is different between snapshots". The MC have
+  a lot of difficulty to compare s_smx_synchro (because of the union):
+  if we could fix this in the future (by using a custom code for
+  comparing s_smx_synchro) we might have more stable state comparison
+  (and less explored states).
+*** Questions
+*** Work Planed [0/0]
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

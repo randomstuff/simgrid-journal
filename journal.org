@@ -158,9 +158,9 @@ How do we want to handle this?
  - Check all the options
  - Check on different problems and check if we find the same results.
 **** TODO Implement the liveness in cross-process
-*** Work Planed [2/3]
+*** Work Planed [3/3]
 **** DONE Fix snapshoting logic and make it work in safety
-**** TODO Test and check for remaining issues in the safety path
+**** DONE Test and check for remaining issues in the safety path
  - Check all the options
  - Check on different problems and check if we find the same results.
 **** DONE Implement the liveness in multi-process
@@ -187,12 +187,22 @@ How do we want to handle this?
 - Moved the liveness code in multi-process.
 - Moved the comm determinism code in multi-process (wip, broken).
 *** Questions
-*** Work Planed [0/0]
-**** TODO Fix the comm determinism to work in multi-process
+*** Work Planed [1/2]
+**** DONE Fix the comm determinism to work in multi-process
 **** TODO Kill the single process path and cleanup
 This will lead to a huge simplification of the code. Then, it will be
 possible to split the code in different directories (for the MCed, for
 the MCed, for both).
+** Week 13 april 2015
+*** Things done
+- Finished to move all the code in split process.
+- WIP cleanup of the code:
+  - remove the entangled MCed/MCer code;
+  - switch some parts to C++ (classes, methods, STL).
+*** Questions
+*** Work Planed [0/0]
+**** TODO Remove the heap juggling (wip)
+**** TODO C++ification
 * Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check

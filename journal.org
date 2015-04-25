@@ -47,7 +47,7 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
    lightweight way to tap into the SIMIX data structures from the
    MCer.
 *** Work Planed
-Same as before and.
+Same as before.
 ** Week 23 feb 2015
 *** Things done
 - Remote access to smx_process, simcalls, host names (cached).
@@ -85,7 +85,6 @@ Same as before and.
   - simcall_comm_testany__get__comms(r)
   - ...
 - Complete remote memory access in mc_state.c
-*** Questions
 *** Work Planed [1/1]
 **** DONE Remote memory access in mc_request.c
 ** Week 16 march 2015
@@ -180,13 +179,11 @@ How do we want to handle this?
   if we could fix this in the future (by using a custom code for
   comparing s_smx_synchro) we might have more stable state comparison
   (and less explored states).
-*** Questions
 *** Work Planed [0/0]
 ** Week 05 april 2015
 *** Things done
 - Moved the liveness code in multi-process.
 - Moved the comm determinism code in multi-process (wip, broken).
-*** Questions
 *** Work Planed [1/2]
 **** DONE Fix the comm determinism to work in multi-process
 **** TODO Kill the single process path and cleanup
@@ -199,11 +196,9 @@ the MCed, for both).
 - WIP cleanup of the code:
   - remove the entangled MCed/MCer code;
   - switch some parts to C++ (classes, methods, STL).
-*** Questions
 *** Work Planed [0/0]
 **** TODO Remove the heap juggling (wip)
 **** TODO C++ification
-* Letter to the Next Guy
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

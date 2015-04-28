@@ -196,9 +196,23 @@ the MCed, for both).
 - WIP cleanup of the code:
   - remove the entangled MCed/MCer code;
   - switch some parts to C++ (classes, methods, STL).
-*** Work Planed [0/0]
-**** TODO Remove the heap juggling (wip)
+*** Work Planed [1/2]
+**** DONE Remove the heap juggling (wip)
 **** TODO C++ification
+** Week 27 april 2015
+*** Things done
+- Remove the multiple heap, heap juggling code.
+- First Simgrid Community Tuesday: 😀
+  - Fix test-smpi-mpich3-attr-raw.
+  - Disable the test msg-exception-thread (which cannot pass on most machines).
+  - Fix gforge issue #1156, "xbt-dict regresion test missing when keys are not null-terminated"
+  - Investigate #18874 "memory leak using the Java binding" (looks normal)
+*** Questions
+- Now that we do not need to use multiple heaps anymore we might use
+  another malloc implementation (jemalloc?) as long as we are able to
+  have a look at its structure. Is there any off-the-shelf (more
+  efficient) malloc implementation which can expose the relevant
+  information to the caller?
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

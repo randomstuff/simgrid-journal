@@ -213,6 +213,10 @@ the MCed, for both).
   have a look at its structure. Is there any off-the-shelf (more
   efficient) malloc implementation which can expose the relevant
   information to the caller?
+** Week 7 may 2015
+*** Things done
+- Fix the build on the CI servers.
+- Fix the tests on the CI servers.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

@@ -217,6 +217,14 @@ the MCed, for both).
 *** Things done
 - Fix the build on the CI servers.
 - Fix the tests on the CI servers.
+** Week 25 may 2015
+*** Things done
+- Code cleanup and C++-ification of some parts of the code. Replaced
+  the C-based virtual-tables with C++ ones by making Process,
+  Snapshot, AddressSpace classes.
+- Fix build/test errors on the CI machines.
+*** Work Planed [0/1]
+**** TODO Fix testall (broken since 8173f52)
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

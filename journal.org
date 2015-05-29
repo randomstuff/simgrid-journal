@@ -219,12 +219,21 @@ the MCed, for both).
 - Fix the tests on the CI servers.
 ** Week 25 may 2015
 *** Things done
-- Code cleanup and C++-ification of some parts of the code. Replaced
-  the C-based virtual-tables with C++ ones by making Process,
-  Snapshot, AddressSpace classes.
+- Code cleanup and C++-ification of some parts of the code.
+  - Replaced the C-based virtual-tables with C++ ones by making
+    Process, Snapshot, AddressSpace classes.
+- Fix some bugs found in the process.
 - Fix build/test errors on the CI machines.
-*** Work Planed [0/1]
-**** TODO Fix testall (broken since 8173f52)
+- Add documentation on the model-checker.
+*** Work Planed [0/3]
+**** TODO Rerun previous experiments (from the papers)
+In order to see how things evolved (results, bugs, performance) with
+the modifications:
+ - split process;
+ - SMPI mutex on messages.
+**** TODO Investigation the barrier bug
+See what we can infer from the model-checker?
+**** TODO Use ISP and compare it with simgrid
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

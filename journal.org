@@ -234,6 +234,16 @@ the modifications:
 **** TODO Investigation the barrier bug
 See what we can infer from the model-checker?
 **** TODO Use ISP and compare it with simgrid
+** Week 1 june 2015
+*** Things done
+- Update MC 101
+- Boost.Context integration
+- Fix CI erros (clang, etc.)
+- Minor usability enchancements to the model-checker
+  - Do not abort;
+  - Add more informations about what's happening (do not silentely terminate);
+  - Enable record/replay in liveness mode (it was only working in safety mode).
+- Read about ISP and DMA (DAMPI?).
 ** Week 15 june 2015
 *** Things done
 - Fix compilation/continuous integration on MacOS X

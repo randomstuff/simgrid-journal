@@ -1,4 +1,4 @@
-* Findings
+* TODO Findings
 http://www.gabriel.urdhr.fr/tags/simgrid/
 * Journal
 ** Week 2 feb 2015
@@ -234,6 +234,18 @@ the modifications:
 **** TODO Investigation the barrier bug
 See what we can infer from the model-checker?
 **** TODO Use ISP and compare it with simgrid
+** Week 15 june 2015
+*** Things done
+- Fix compilation/continuous integration on MacOS X
+- Fix continuous integration in general
+- Boost contexts
+  - add parallel execution
+  - add newer versions of boost
+- Fix the kademlia bug: it was related non-synchronized concurrent
+  modification.
+- (wip) Working on the on-off thread and the related bugs.
+*** Work Planed [0/1]
+**** TODO Fix the on-off code
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

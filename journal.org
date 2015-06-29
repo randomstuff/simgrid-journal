@@ -268,6 +268,26 @@ See what we can infer from the model-checker?
 - (wip) Working on the on-off test and the related bugs
   (https://github.com/mquinson/simgrid/issues/7): should we fix this
   at the SURF, SIMIX error, SIMIX exception layer?
+** Week 20 june 2015
+*** Things done
+- Read papers about ISP (In-situ Partial Order,
+  http://formalverification.cs.utah.edu/ISP-Release/) and DAMPI
+  (Distributed Analyzer for MPI, https://github.com/soarlab/DAMPI):
+  - They both focus exclusively on MPI applications.
+  - Supposed to be push-button.
+  - Use the PMI (ISP) or P^nMPI (DAMPI) interface to plug dynamic
+    verification in an existing MPI implementation (MPICH2, OpenMPI).
+  - ISP uses a centralized scheduler.
+  - DAMPI uses a decentralized scheduling which leads to a better
+    usage of the cluster.
+  - POE (Partial Order Reduction avoiding Elusive interleavings)
+  - Use the knowledge of collective functions to avoid the
+    combinatorial (N!) explosion when traversing a collective.
+  - Rexecution from MPI_Init().
+  - POE: how does it compare wrt POR, DPOR?
+  - GUI integration
+    (http://formalverification.cs.utah.edu/ISP-Eclipse/):
+    - visualisation of matching MPI calls (MPI_Send and MPI_Recv)
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

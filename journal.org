@@ -253,9 +253,21 @@ See what we can infer from the model-checker?
   - add newer versions of boost
 - Fix the kademlia bug: it was related non-synchronized concurrent
   modification.
-- (wip) Working on the on-off thread and the related bugs.
+- (wip) Working on the on-off test and the related bugs.
 *** Work Planed [0/1]
 **** TODO Fix the on-off code
+** Week 22 june 2015
+*** Things done
+- Fix the segfaults in simterpose. They were related to buggy handling
+  of file descriptors:
+  - there was a maximum FD value that could be handled by the code;
+  - using a FD value higher than this would use pointer to random memory area;
+  - valgtind uses FD in the higher range (65535 and below) for its own
+    purpose which triggered the bug;
+- Some other enhancements in Simterpose.
+- (wip) Working on the on-off test and the related bugs
+  (https://github.com/mquinson/simgrid/issues/7): should we fix this
+  at the SURF, SIMIX error, SIMIX exception layer?
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

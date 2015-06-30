@@ -288,6 +288,18 @@ See what we can infer from the model-checker?
   - GUI integration
     (http://formalverification.cs.utah.edu/ISP-Eclipse/):
     - visualisation of matching MPI calls (MPI_Send and MPI_Recv)
+- Reference count bug in the host-on-off test (on a comm object):
+  - 2 +1:
+    - commRX irecv
+    - commTX isend
+  - but 3 -1 ():
+    - kill commRX
+    - for (action : surf_model_extract_failed_action_set) SIMIX_simcall_exit(surf_action_get_data(action))
+    - commTX: exit
+  - The destroy function is called on a obejct which is already dead.
+  - Found with:
+    - break SIMIX_comm_destroy is synchro == ...
+    - watch -l synchro->comm.refcount
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

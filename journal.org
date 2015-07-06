@@ -295,6 +295,49 @@ See what we can infer from the model-checker?
 **** TODO Reference count bug in the host-on-off test
 - See https://github.com/mquinson/simgrid/issues/7.
 - The comm object is decremented 3× but has only been incremented 2×.
+** Week 6 july 2015
+*** Things done
+**** Bibliography
+***** Dwymer et al specification patterns
+- Papers:
+ - Patterns in property specifications for finite-state verification (Dwymer et al)
+ - Property specification patterns for finite-state verification (Dwymer et al)
+- Website with all the details of the patterns:
+ - http://patterns.projects.cis.ksu.edu/
+- Specification of temporal properties abstracted from the lower level
+  language (LTL, CTL, QRE, GIL, INCA, ACTL, …).
+- Scope, when we want to check the property
+  - Global
+  - BEfore Q
+  - After Q
+  - Before Q and R
+  - After Q and R
+- Patterns
+  - Precedence (S precedes P)
+  - Absence
+  - Universality
+  - Existence
+  - Bounded existence
+  - Follows
+  - Chaine Precedence
+  - Chain Response
+- For each element of (scope×pattern×language), a mapping is defined
+  manually.
+***** A Compositional Automata-based Semantics for Property Patterns (Castillos et al)
+- Dwymer scope/pattern language:
+  - lack of composability
+  - lack of extensibility
+  - combinatorial explosion (scope×pattern)
+- Proposition:
+  - composable scope/pattern definition based on Büchi automatons
+- Pattern:
+  - Büchi automaton where the transitions are labeled with state propositions
+- Scope:
+  - special Büchi automaton with a "composition state" cs representing
+    the pattern
+  - the cs can be an accepting state
+- Define a composition operation between the pattern automaton and the
+  scope automaton.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

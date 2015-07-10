@@ -338,6 +338,31 @@ See what we can infer from the model-checker?
   - the cs can be an accepting state
 - Define a composition operation between the pattern automaton and the
   scope automaton.
+**** Fixed the host-on-off bug
+At last!
+**** Fixing bug (CI/release)
+We have green lights on Linus without Modelchecking:
+- Some issues with MacOS X and FreeBSD.
+- Model-Checker:
+  - Use new systcall/feature from the kernel not available on some OSes.
+  - Seems broken on 32 bit.
+  - Some weird bugs show up on unrelated tests when MC is compiled-in
+    (for example test-smpi-mpich3-thread-f90).
+**** Client/server (HTTP) SimGrid
+- Which design?
+  - Remote MSG/SMPI?
+  - based on replay with a Simgrid/server-side plugin?
+  - As a user, I probably don't want to write a plugin. Especially if
+    I'm programming in Java and have to write the plugin in C or C++.
+- Synchronization between the application threads, HTTPd thread(s),
+  the in-SimGrid stub contexts and Maestro.
+  - Communication bewteen the subs and the HTTPd threds using native
+    system synchronization techniques. I think, it should be
+    allright :)
+  - At some point we could get rid of the
+- We don't want to link against native libsimgrid in the client
+  (especially if it's a Java/Python/Ruby/Lua/JavaScript application)
+  so the API must be simple.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

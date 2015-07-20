@@ -363,6 +363,13 @@ We have green lights on Linus without Modelchecking:
 - We don't want to link against native libsimgrid in the client
   (especially if it's a Java/Python/Ruby/Lua/JavaScript application)
   so the API must be simple.
+** Week 13 july 2015
+*** Things done
+- Fix MC for 32 bit.
+- Add some documentation for release.
+- Code cleanup in the MC:
+  - Remove useless bits;
+  - C++ification of some code.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

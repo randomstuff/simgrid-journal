@@ -370,6 +370,26 @@ We have green lights on Linus without Modelchecking:
 - Code cleanup in the MC:
   - Remove useless bits;
   - C++ification of some code.
+** Week 20 july 2015
+*** Things done
+- Cleanup, C++ification of the MC codebase.
+- Prepration for release (fix bugs, fix CI)
+** Week 27 july 2015
+*** Things done
+- Cleanup, C++ification of the MC codebase.
+- Prepration for release (fix bugs, fix CI)
+- Some ISP Umpire test do not finish anymore:
+  - Since 51a5d2e12715401658d5416f621fb5c89a9b5278 Add a mutex to lock access to the SMPI mailboxes
+  - Reverting this commit feature fixes the test on master.
+  - I'm not sure why this happens yet.
+  - However, we should probably handle SIMCALL_MUTEX_* in the MC (?):
+    they are supposed to influence the message ordering and they are
+    currently ignored in the interleavings.
+  - Same for SIMCALL_COND_*, SIMCALL_SEM_*…
+  - Lot of work do do?
+  - We should probably abort on simcalls by default an then add the
+    proper behaviour for simcalls we know we handle in MC: this would
+    avoid handling simcalls incorrectly.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

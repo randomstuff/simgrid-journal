@@ -390,6 +390,30 @@ We have green lights on Linus without Modelchecking:
   - We should probably abort on simcalls by default an then add the
     proper behaviour for simcalls we know we handle in MC: this would
     avoid handling simcalls incorrectly.
+** Week 27 august 2015
+*** Things done
+- Fix broken umpire test (no-erro2 and friends):
+  - they did not terminate anymore;
+  - regression introduced by the locks around the SMPI messages (see
+    smpi_base.c and commit 51a5d2e12715401658d5416f621fb5c89a9b5278);
+  - MUTEX_LOCK simcall does not seem to be handled correctly by DPOR
+    (see the mutex-handling tests) and those tests are using DPOR (it
+    is used by default);
+  - I change the code of SMPI to avoid the lock when the
+    smpi/async_small_thres threshold is 0: it should not be necessary
+    in this case anyway. This fixes the broken umpire tests.
+- Fixing the handling of SIMCALL_MUTEX_LOCK in DPOR:
+  - Using DPOR with a dummy dependency function D(t,t-) = true (with
+    the mutex-handling test ) visits more states than without
+    reduction (!): there's something wrong here.
+  - SIMCALL_MUTEX_TRYLOCK is not handled by the MC (it is not
+    considered visible);
+  - SIMCALL_MUTEX_UNLOCK is considered non-visible: is this really
+    correct?
+*** Work Planed [0/1]
+**** TODO Try a MacOS X MC port
+Test how MMU based snapshoting work (probably not so well).
+**** TODO Mutex-aware DPOR
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

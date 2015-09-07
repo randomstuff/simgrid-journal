@@ -10,7 +10,7 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
    handled in the MCer but this function exposes a callback function
    for evaluating a symbol. What should we do about this? Kindly ask
    the MCed to execute the function(s) for us?
-*** Work Planed [3/4]
+*** Work Planned [3/4]
 **** DONE proper handling of the message on the server side
  - Some message handling is currently stubbed in the MCer.
 **** DONE add missing cross-process MCer/MCed communication
@@ -46,7 +46,7 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
    the remaining boring part is to find a generic, simple, readable,
    lightweight way to tap into the SIMIX data structures from the
    MCer.
-*** Work Planed
+*** Work Planned
 Same as before.
 ** Week 23 feb 2015
 *** Things done
@@ -58,7 +58,7 @@ Same as before.
   the MCed process. It might be cleaner to have the MCed process
   signal the MCer process of the changes (use message passing instead
   of reading in the MCed process).
-*** Work Planed [4/4]
+*** Work Planned [4/4]
 **** DONE Remote access to proces name
 **** DONE Remote access to synchro
 **** DONE Finish integration of those modification in all the code
@@ -73,7 +73,7 @@ Same as before.
   be better (more efficient) to use some sort of host identifier
   instead. AFAIK, we don't really have a host identifier. We can
   either use the host name of the address of the host process.
-*** Work Planed [1/1]
+*** Work Planned [1/1]
 **** DONE Remote access to host name
 ** Week 9 march 2015
 *** Things done
@@ -85,7 +85,7 @@ Same as before.
   - simcall_comm_testany__get__comms(r)
   - ...
 - Complete remote memory access in mc_state.c
-*** Work Planed [1/1]
+*** Work Planend [1/1]
 **** DONE Remote memory access in mc_request.c
 ** Week 16 march 2015
 *** Things done
@@ -97,7 +97,7 @@ Same as before.
    performance impact be negligeable? Do we want to be more clever
    (use caching? fetching complexe data structures with logic on the
    MCed side).
-*** Work Planed [1/1]
+*** Work Planned [1/1]
 **** DONE Safety algorithm on the MCer side
  - This was already on the TODO list of week 23 feb 2015. I will
    probably find remaining cross process access issues in the process.
@@ -151,13 +151,7 @@ How do we want to handle this?
  - Shall we move towards a design were each simulated process is
    isolated in its own process? 
    - [Mt] that would help for SMPI anyway
-*** Work Planed
-**** TODO Fix snapshoting logic and make it work in safety
-**** TODO Test and check for remaining issues in the safety path
- - Check all the options
- - Check on different problems and check if we find the same results.
-**** TODO Implement the liveness in cross-process
-*** Work Planed [3/3]
+*** Work Planned [3/3]
 **** DONE Fix snapshoting logic and make it work in safety
 **** DONE Test and check for remaining issues in the safety path
  - Check all the options
@@ -179,12 +173,12 @@ How do we want to handle this?
   if we could fix this in the future (by using a custom code for
   comparing s_smx_synchro) we might have more stable state comparison
   (and less explored states).
-*** Work Planed [0/0]
+*** Work Planned [0/0]
 ** Week 05 april 2015
 *** Things done
 - Moved the liveness code in multi-process.
 - Moved the comm determinism code in multi-process (wip, broken).
-*** Work Planed [2/2]
+*** Work Planned [2/2]
 **** DONE Fix the comm determinism to work in multi-process
 **** DONE Kill the single process path and cleanup
 This will lead to a huge simplification of the code. Then, it will be
@@ -196,7 +190,7 @@ the MCed, for both).
 - WIP cleanup of the code:
   - remove the entangled MCed/MCer code;
   - switch some parts to C++ (classes, methods, STL).
-*** Work Planed [1/2]
+*** Work Planned [1/2]
 **** DONE Remove the heap juggling (wip)
 **** TODO C++ification
 ** Week 27 april 2015
@@ -225,7 +219,7 @@ the MCed, for both).
 - Fix some bugs found in the process.
 - Fix build/test errors on the CI machines.
 - Add documentation on the model-checker.
-*** Work Planed [0/3]
+*** Work Planned [0/3]
 **** TODO Rerun previous experiments (from the papers)
 In order to see how things evolved (results, bugs, performance) with
 the modifications:
@@ -254,7 +248,7 @@ See what we can infer from the model-checker?
 - Fix the kademlia bug: it was related non-synchronized concurrent
   modification.
 - (wip) Working on the on-off test and the related bugs.
-*** Work Planed [0/1]
+*** Work Planned [0/1]
 **** TODO Fix the on-off code
 ** Week 22 june 2015
 *** Things done
@@ -291,7 +285,7 @@ See what we can infer from the model-checker?
   (http://formalverification.cs.utah.edu/ISP-Eclipse/):
   - visualisation of matching MPI calls (MPI_Send and MPI_Recv)
 **** Fixed the first half of the host-on-off bug.
-*** Work Planed [0/1]
+*** Work Planned [0/1]
 **** TODO Reference count bug in the host-on-off test
 - See https://github.com/mquinson/simgrid/issues/7.
 - The comm object is decremented 3× but has only been incremented 2×.
@@ -410,10 +404,40 @@ We have green lights on Linus without Modelchecking:
     considered visible);
   - SIMCALL_MUTEX_UNLOCK is considered non-visible: is this really
     correct?
-*** Work Planed [0/1]
+*** Work Planned [0/1]
 **** TODO Try a MacOS X MC port
 Test how MMU based snapshoting work (probably not so well).
 **** TODO Mutex-aware DPOR
+** Week 31 August 2015
+*** Things done
+Tried the MacOS X prot:
+- not in good shape;
+  - the plan was to avois spending to much time on this and drop it if
+    it was taking too much time;
+  - therefore, we should drop this;
+- many small issues fixed;
+- DWARF support:
+  - libdw is currently used but only reads DWARF from ELF;
+  - libdwarf can handle DWARF section from any kind of file;
+  - however the API of libdwarf and libdw is completely incompatible;
+  - ~700 LoC of DWARF processing needs to be rewritten;
+  - I tries to make a compatibility layer but it was a mess, much
+    simpler to rewrite the code;
+- custom malloc:
+  - there is special support for this in MacOS X;
+  - by overriding the function pointers in the default zone we should
+    be able to achieve this;
+  - currently not working however;
+- MacOS X issues:
+  - libtool is not willing to generate shared objects files (for
+    libelf and libdwarf);
+  - currently the debugger are not willing to cooperate with me :)
+- Not touched yet;
+  - get the list of VMAs
+  - implement CoW snapshot
+*** Work Planned [0/1]
+**** TODO Fix Jenkins
+**** TODO Work on ISP testsuite
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

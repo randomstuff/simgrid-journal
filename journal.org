@@ -1,3 +1,4 @@
+#+TODO: TODO WIP | DONE CANCELED
 * TODO Findings
 http://www.gabriel.urdhr.fr/tags/simgrid/
 * Journal
@@ -192,7 +193,7 @@ the MCed, for both).
   - switch some parts to C++ (classes, methods, STL).
 *** Work Planned [1/2]
 **** DONE Remove the heap juggling (wip)
-**** TODO C++ification
+**** WIP C++ification
 ** Week 27 april 2015
 *** Things done
 - Remove the multiple heap, heap juggling code.
@@ -249,7 +250,7 @@ See what we can infer from the model-checker?
   modification.
 - (wip) Working on the on-off test and the related bugs.
 *** Work Planned [0/1]
-**** TODO Fix the on-off code
+**** DONE Fix the on-off code
 ** Week 22 june 2015
 *** Things done
 - Fix the segfaults in simterpose. They were related to buggy handling
@@ -285,8 +286,8 @@ See what we can infer from the model-checker?
   (http://formalverification.cs.utah.edu/ISP-Eclipse/):
   - visualisation of matching MPI calls (MPI_Send and MPI_Recv)
 **** Fixed the first half of the host-on-off bug.
-*** Work Planned [0/1]
-**** TODO Reference count bug in the host-on-off test
+*** Work Planned [1/1]
+**** DONE Reference count bug in the host-on-off test
 - See https://github.com/mquinson/simgrid/issues/7.
 - The comm object is decremented 3× but has only been incremented 2×.
 ** Week 6 july 2015
@@ -404,8 +405,8 @@ We have green lights on Linus without Modelchecking:
     considered visible);
   - SIMCALL_MUTEX_UNLOCK is considered non-visible: is this really
     correct?
-*** Work Planned [0/1]
-**** TODO Try a MacOS X MC port
+*** Work Planned [1/2]
+**** CANCELED Try a MacOS X MC port
 Test how MMU based snapshoting work (probably not so well).
 **** TODO Mutex-aware DPOR
 ** Week 31 August 2015
@@ -420,7 +421,7 @@ Tried the MacOS X prot:
   - libdw is currently used but only reads DWARF from ELF;
   - libdwarf can handle DWARF section from any kind of file;
   - however the API of libdwarf and libdw is completely incompatible;
-  - ~700 LoC of DWARF processing needs to be rewritten;
+  - ~700 LoC of DWARF processing needs to be rewritten&;
   - I tries to make a compatibility layer but it was a mess, much
     simpler to rewrite the code;
 - custom malloc:

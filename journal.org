@@ -456,10 +456,13 @@ Tried the MacOS X prot:
     evaluation of the different snapshoting strategies.
   - As DWARF is only used for comparing the snapshots, we might as
     well evaluate on exhaustive explorations.
+  - A simple solution is to always return "different" in the
+    comparison function.
   - We might then add DWARF support if we have time for this.
-  - In master, I should move all the libdwarf related code into a .c
-    file (mc_libdwarf.c) and move all the libdwarf-independent code
-    out of this file.  This would make this kinf od things easier.
+  - In master, I should move all the libdw related code into a .c file
+    (mc_libdw.c) and move all the libdw-independent code out of this
+    file.  This would make this kind of things easier (porting to
+    libdwarf, disabling DWARF support).
 *** Work plannes [0/1]
 **** TODO SimGridMC on MacOS X without DWARF
 * Abbreviations

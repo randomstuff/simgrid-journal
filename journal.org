@@ -1,4 +1,4 @@
-#+TODO: TODO WIP | DONE CANCELED
+#+TODO: TODO WIP LATER | DONE CANCELED
 * TODO Findings
 http://www.gabriel.urdhr.fr/tags/simgrid/
 * Journal
@@ -47,7 +47,7 @@ http://www.gabriel.urdhr.fr/tags/simgrid/
    the remaining boring part is to find a generic, simple, readable,
    lightweight way to tap into the SIMIX data structures from the
    MCer.
-*** Work Planned
+*** Work Planned [0/0]
 Same as before.
 ** Week 23 feb 2015
 *** Things done
@@ -249,7 +249,7 @@ See what we can infer from the model-checker?
 - Fix the kademlia bug: it was related non-synchronized concurrent
   modification.
 - (wip) Working on the on-off test and the related bugs.
-*** Work Planned [0/1]
+*** Work Planned [1/1]
 **** DONE Fix the on-off code
 ** Week 22 june 2015
 *** Things done
@@ -408,7 +408,7 @@ We have green lights on Linus without Modelchecking:
 *** Work Planned [1/2]
 **** CANCELED Try a MacOS X MC port
 Test how MMU based snapshoting work (probably not so well).
-**** TODO Mutex-aware DPOR
+**** LATER Mutex-aware DPOR
 ** Week 31 August 2015
 *** Things done
 Tried the MacOS X prot:
@@ -439,6 +439,29 @@ Tried the MacOS X prot:
 *** Work Planned [0/1]
 **** TODO Fix Jenkins
 **** TODO Work on ISP testsuite
+** Week 7 September 2015
+*** Things done
+- Fix CI:
+  - Fix LTO witht the different versions of GCC (was broken on travis);
+  - Add a FreeBSD 10 jenkins node, remove FreeBSD 9 and kill the C++
+    library switching code in cmake script
+  - Fix code for FreeBSD 10
+- Backport some fixes from the experimental MacOS X MC branch
+  into master.
+- Try to fix Windows build on Jenkins.
+  - At some point, we should probably try to make it work with
+    VisualStudio.
+- Working on MacOS X without DWARF:
+  - The idea was that we might take snaphot out of SimGridMC for the
+    evaluation of the different snapshoting strategies.
+  - As DWARF is only used for comparing the snapshots, we might as
+    well evaluate on exhaustive explorations.
+  - We might then add DWARF support if we have time for this.
+  - In master, I should move all the libdwarf related code into a .c
+    file (mc_libdwarf.c) and move all the libdwarf-independent code
+    out of this file.  This would make this kinf od things easier.
+*** Work plannes [0/1]
+**** TODO SimGridMC on MacOS X without DWARF
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

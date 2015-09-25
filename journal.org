@@ -436,8 +436,8 @@ Tried the MacOS X prot:
 - Not touched yet;
   - get the list of VMAs
   - implement CoW snapshot
-*** Work Planned [0/1]
-**** TODO Fix Jenkins
+*** Work Planned [1/2]
+**** DONE Fix Jenkins
 **** TODO Work on ISP testsuite
 ** Week 7 September 2015
 *** Things done
@@ -463,8 +463,18 @@ Tried the MacOS X prot:
     (mc_libdw.c) and move all the libdw-independent code out of this
     file.  This would make this kind of things easier (porting to
     libdwarf, disabling DWARF support).
-*** Work plannes [0/1]
-**** TODO SimGridMC on MacOS X without DWARF
+*** Work plannes [1/1]
+**** CANCELED SimGridMC on MacOS X without DWARF
+** Week 14 September 2015
+- Work on MacOS X without DWARF => canceled
+- Remove the intrusive base members in SURF: it seems MSVC like the
+  member hooks better.
+** Week 21 September 2015
+*** Things done
+- Reproducible experiments for snapshots:
+  - some patches in SimGrid for the experiments;
+  - script for launching the experiments;
+  - data post-processing.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

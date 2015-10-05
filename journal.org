@@ -475,6 +475,19 @@ Tried the MacOS X prot:
   - some patches in SimGrid for the experiments;
   - script for launching the experiments;
   - data post-processing.
+** Week 28 September 2015
+*** Things done
+- Rebase/port the experiments in the current branch
+  - Bring back some features which were removed to the split-process
+    model (KSM, soft-dirty).
+  - Issues:
+    - Memory corruption! (malloc)
+    - Sometimes, the MC takes a lot of time.
+    - Probably related to the memory corrutpion.
+- (wip) Fix the memory corruption
+*** Work plannes [1/1]
+**** TODO Fix memory corruption
+**** TODO Launch the experiments with split process
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

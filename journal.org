@@ -485,9 +485,157 @@ Tried the MacOS X prot:
     - Sometimes, the MC takes a lot of time.
     - Probably related to the memory corrutpion.
 - (wip) Fix the memory corruption
-*** Work plannes [1/1]
-**** TODO Fix memory corruption
-**** TODO Launch the experiments with split process
+*** Work planned [2/2]
+**** DONE Fix memory corruption
+**** DONE Launch the experiments with split process
+** Week 5 October 2015
+*** Things done
+- Fix the memory corruption:
+  - Spent some time trying to locate the bug in the git history but it
+    kept appearing and disappearing randomly.
+  - Finally, used valgrind and found the issue: valgrind now works on
+    MC!
+  - However after fixing the issue the liveness test does not
+    terminate anymore. We should probably spend time fixing the state
+    comparison code which is quite big, difficult to read and needs
+    fixing.
+- Ran the MC test suite on valgrind in order to find additional
+  issues:
+  - Found a minor memory leak (called only a few times at
+    initialisation).
+- Fixed another issue with DWARF-based location of variables.
+- Cleanup of the MC code.
+- It seems we have problems with the state comparion code which seems
+  buggy:
+  - now:
+    - bugged2                                   => PROPERTY NOT VALID
+    - bugged2 --cfg=model-check/visited:1000000 => no error
+  - before the fix      => same
+  - before the MC split => PROPERTY NOT VALID in both cases
+  - The MC code needs a lot of cleanup and better testing.
+- Run the snapshot experiments on the split-process version of the MC:
+  - Single-process:
+    name            np  type       states  clock    max       mem
+    dup             2   plain      109     1.82     445.80    474.09
+    dup             2   KSM        109     1.97     448.15    396.55
+    dup             2   page       109     1.80     314.67    335.31
+    dup             2   page+soft  109     1.96     314.52    336.32
+    dup             3   plain      453     3.72     770.03    793.09
+    dup             3   KSM        453     4.42     741.89    484.95
+    dup             3   page       453     3.89     332.80    352.23
+    dup             3   page+soft  453     4.25     333.18    352.04
+    dup             4   plain      2751    56.21    3239.18   3249.12
+    dup             4   KSM        2751    60.71    3070.91   1068.41
+    dup             4   page       2751    64.23    655.15    654.38
+    dup             4   page+soft  2751    65.92    658.56    656.88
+    groupcreate     2   plain      13      1.43     327.20    329.52
+    groupcreate     2   KSM        13      1.46     327.62    328.63
+    groupcreate     2   page       13      1.43     314.14    310.06
+    groupcreate     2   page+soft  13      1.45     314.04    311.68
+    groupcreate     3   plain      85      1.81     402.02    408.04
+    groupcreate     3   KSM        85      1.96     403.40    351.82
+    groupcreate     3   page       85      1.87     314.07    317.66
+    groupcreate     3   page+soft  85      1.96     314.07    317.77
+    groupcreate     4   plain      1360    47.46    1983.48   1987.39
+    groupcreate     4   KSM        1360    49.31    1899.27   495.59
+    groupcreate     4   page       1360    53.32    449.58    451.26
+    groupcreate     4   page+soft  1360    54.72    451.14    450.53
+    sendrecv2       2   plain      1990    15.94    3290.00   3295.64
+    sendrecv2       2   KSM        1990    19.01    3093.88   1245.95
+    sendrecv2       2   page       1990    17.31    507.29    509.09
+    sendrecv2       2   page+soft  1990    18.50    509.75    510.63
+    op_commutative  3   plain      86      1.86     404.49    408.15
+    op_commutative  3   KSM        86      1.97     405.97    350.70
+    op_commutative  3   page       86      1.87     314.72    317.37
+    op_commutative  3   page+soft  86      1.91     314.56    316.80
+    op_commutative  4   plain      1422    49.47    2285.04   2289.50
+    op_commutative  4   KSM        1422    51.01    1983.49   500.66
+    op_commutative  4   page       1422    54.79    454.09    452.76
+    op_commutative  4   page+soft  1422    56.35    455.67    454.04
+    op_commutative  5   plain      11471   2184.03  13874.50  13898.13
+    op_commutative  5   KSM        11471   2176.23  13090.33  2006.66
+    op_commutative  5   page       11471   2482.88  1823.95   1824.65
+    op_commutative  5   page+soft  11471   2514.31  1838.00   1839.66
+  - Split process:
+    name            np  type       states  clock   max      mem
+    dup             2   plain      117     1.77    254.00   278.77
+    dup             2   KSM        117     1.80    253.89   155.75
+    dup             2   page       117     1.83    116.40   129.73
+    dup             2   page+soft  117     1.68    116.35   129.18
+    dup             3   plain      764     10.82   854.40   874.09
+    dup             3   KSM        764     11.47   855.38   199.03
+    dup             3   page       764     11.08   130.05   149.48
+    dup             3   page+soft  764     10.44   130.31   145.20
+    dup             4   plain      4117    70.83   3410.55  3427.15
+    dup             4   KSM        4117    75.37   3412.69  462.72
+    dup             4   page       4117    73.24   262.04   272.71
+    dup             4   page+soft  4117    69.61   261.93   272.71
+    groupcreate     2   plain      13      0.81    125.00   138.23
+    groupcreate     2   KSM        13      0.80    125.68   137.57
+    groupcreate     2   page       13      0.80    116.36   121.56
+    groupcreate     2   page+soft  13      0.79    116.30   121.55
+    groupcreate     3   plain      111     1.95    233.83   251.38
+    groupcreate     3   KSM        111     2.03    233.98   141.84
+    groupcreate     3   page       111     1.98    116.28   123.98
+    groupcreate     3   page+soft  111     1.89    116.43   123.37
+    groupcreate     4   plain      1122    18.22   1032.96  1049.35
+    groupcreate     4   KSM        1122    19.55   1034.56  227.52
+    groupcreate     4   page       1122    18.76   139.40   153.88
+    groupcreate     4   page+soft  1122    17.84   139.46   150.30
+    sendrecv2       2   plain      357     3.70    572.99   587.48
+    sendrecv2       2   KSM        357     3.94    573.77   201.78
+    sendrecv2       2   page       357     3.73    116.26   130.88
+    sendrecv2       2   page+soft  357     3.46    116.40   129.54
+    op_commutative  3   plain      112     1.96    236.14   253.91
+    op_commutative  3   KSM        112     2.04    236.11   140.17
+    op_commutative  3   page       112     1.99    116.33   124.16
+    op_commutative  3   page+soft  112     1.90    116.35   123.67
+    op_commutative  4   plain      1239    21.43   1158.04  1170.32
+    op_commutative  4   KSM        1239    22.63   1159.80  252.58
+    op_commutative  4   page       1239    22.03   144.21   158.47
+    op_commutative  4   page+soft  1239    21.02   144.09   154.51
+    op_commutative  5   plain      7309    137.67  5414.60  5434.70
+    op_commutative  5   KSM        7309    146.77  5419.93  621.50
+    op_commutative  5   page       7309    142.31  387.36   398.13
+    op_commutative  5   page+soft  7309    136.25  387.38   398.57
+  - The difference in terme of time is not so significant.
+  - In the new version, soft-dirty is always faster. Previously, we
+    found that soft-dirty was slower.
+    - A difference is that, we now need to use syscalls in order to
+      read/write from the simulated process memory.
+    - We generate extra page faults but we avoid some syscalls and
+      remote-process memory accesses.
+- Look at the ISP testsuite http://formalverification.cs.utah.edu/ISP_Tests/
+  - Some deadlocks are found by ISP but not by SimGridMC:
+    - mc-umpire-any_src-can-deadlock7
+    - mc-umpire-any_src-can-deadlock8
+    - mc-umpire-any_src-can-deadlock9
+    - mc-umpire-any_src-can-deadlock11
+    - mc-umpire-collective-misorder2
+    - mc-umpire-comm-bcast-deadlock
+    - mc-umpire-comm-deadlock
+    - mc-umpire-dropped-req
+  - We find a deadlock in the main version but not in the modified
+    one:
+    - mc-umpire-any_src-can-deadlock4_mod
+    - mc-umpire-any_src-can-deadlock5_mod
+    - mc-umpire-any_src-can-deadlock6_mod
+    - mc-umpire-any_src-can-deadlock10_mod    
+  - ISP does not find a deadlock and we don't terminate:
+    - mc-umpire-irecv-isend-ok2
+      - ISP only finds one interleaving.
+      - We are lost in an ocean of interleavings.
+      - Still does not terminate if we remove the MPI_Barrier.
+      - Could it be related to MPI_Finalize?
+        - which makes a xbt_barrier_wait…
+        - which makes xbt_mutex_* (simcall_mutex_*) and xbt_cond_*
+          (simcall_cond_*) operations.
+    - Some tests are expected to have deadlocks (?, AFAIU) but ISP do
+      not find them and neither do we:
+      - any_src-deadlock
+      - any_src-can-deadlock
+      - any_src-can-deadlock2
+      - any_src-can-deadlock3
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

@@ -630,12 +630,12 @@ Tried the MacOS X prot:
         - which makes a xbt_barrier_wait…
         - which makes xbt_mutex_* (simcall_mutex_*) and xbt_cond_*
           (simcall_cond_*) operations.
-    - Some tests are expected to have deadlocks (?, AFAIU) but ISP do
-      not find them and neither do we:
-      - any_src-deadlock
-      - any_src-can-deadlock
-      - any_src-can-deadlock2
-      - any_src-can-deadlock3
+  - Some tests are expected to have deadlocks (?, AFAIU) but ISP do
+    not find them and neither do we:
+    - any_src-deadlock
+    - any_src-can-deadlock
+    - any_src-can-deadlock2
+    - any_src-can-deadlock3
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

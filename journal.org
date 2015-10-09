@@ -490,31 +490,33 @@ Tried the MacOS X prot:
 **** DONE Launch the experiments with split process
 ** Week 5 October 2015
 *** Things done
-- Fix the memory corruption:
-  - Spent some time trying to locate the bug in the git history but it
-    kept appearing and disappearing randomly.
-  - Finally, used valgrind and found the issue: valgrind now works on
-    MC!
-  - However after fixing the issue the liveness test does not
-    terminate anymore. We should probably spend time fixing the state
-    comparison code which is quite big, difficult to read and needs
-    fixing.
-- Ran the MC test suite on valgrind in order to find additional
-  issues:
-  - Found a minor memory leak (called only a few times at
-    initialisation).
-- Fixed another issue with DWARF-based location of variables.
-- Cleanup of the MC code.
+**** Fix the memory corruption
+- Spent some time trying to locate the bug in the git history but it
+  kept appearing and disappearing randomly.
+- Finally, used valgrind and found the issue: valgrind now works on
+  MC!
+- However after fixing the issue the liveness test does not
+  terminate anymore. We should probably spend time fixing the state
+  comparison code which is quite big, difficult to read and needs
+  fixing.
+**** Ran the MC test suite on valgrind
+- in order to find additional issues:
+- Found a minor memory leak (called only a few times at
+  initialisation).
+**** Fixed another issue with DWARF-based location of variables.
+**** Cleanup of the MC code.
+**** Look at problem with state comparison code
 - It seems we have problems with the state comparion code which seems
   buggy:
-  - now:
-    - bugged2                                   => PROPERTY NOT VALID
-    - bugged2 --cfg=model-check/visited:1000000 => no error
-  - before the fix      => same
-  - before the MC split => PROPERTY NOT VALID in both cases
-  - The MC code needs a lot of cleanup and better testing.
-- Run the snapshot experiments on the split-process version of the MC:
-  - Single-process:
+- now:
+  - bugged2                                   => PROPERTY NOT VALID
+  - bugged2 --cfg=model-check/visited:1000000 => no error
+- before the fix      => same
+- before the MC split => PROPERTY NOT VALID in both cases
+- The MC code needs a lot of cleanup and better testing.
+**** Snapshot experiments in split process MC
+- Run the snapshot experiments on the split-process version of the MC
+- Single-process:
     name            np  type       states  clock    max       mem
     dup             2   plain      109     1.82     445.80    474.09
     dup             2   KSM        109     1.97     448.15    396.55
@@ -556,7 +558,7 @@ Tried the MacOS X prot:
     op_commutative  5   KSM        11471   2176.23  13090.33  2006.66
     op_commutative  5   page       11471   2482.88  1823.95   1824.65
     op_commutative  5   page+soft  11471   2514.31  1838.00   1839.66
-  - Split process:
+- Split process:
     name            np  type       states  clock   max      mem
     dup             2   plain      117     1.77    254.00   278.77
     dup             2   KSM        117     1.80    253.89   155.75
@@ -598,44 +600,45 @@ Tried the MacOS X prot:
     op_commutative  5   KSM        7309    146.77  5419.93  621.50
     op_commutative  5   page       7309    142.31  387.36   398.13
     op_commutative  5   page+soft  7309    136.25  387.38   398.57
-  - The difference in terme of time is not so significant.
-  - In the new version, soft-dirty is always faster. Previously, we
-    found that soft-dirty was slower.
-    - A difference is that, we now need to use syscalls in order to
-      read/write from the simulated process memory.
-    - We generate extra page faults but we avoid some syscalls and
-      remote-process memory accesses.
-- Look at the ISP testsuite http://formalverification.cs.utah.edu/ISP_Tests/
-  - Some deadlocks are found by ISP but not by SimGridMC:
-    - mc-umpire-any_src-can-deadlock7
-    - mc-umpire-any_src-can-deadlock8
-    - mc-umpire-any_src-can-deadlock9
-    - mc-umpire-any_src-can-deadlock11
-    - mc-umpire-collective-misorder2
-    - mc-umpire-comm-bcast-deadlock
-    - mc-umpire-comm-deadlock
-    - mc-umpire-dropped-req
-  - We find a deadlock in the main version but not in the modified
-    one:
-    - mc-umpire-any_src-can-deadlock4_mod
-    - mc-umpire-any_src-can-deadlock5_mod
-    - mc-umpire-any_src-can-deadlock6_mod
-    - mc-umpire-any_src-can-deadlock10_mod    
-  - ISP does not find a deadlock and we don't terminate:
-    - mc-umpire-irecv-isend-ok2
-      - ISP only finds one interleaving.
-      - We are lost in an ocean of interleavings.
-      - Still does not terminate if we remove the MPI_Barrier.
-      - Could it be related to MPI_Finalize?
-        - which makes a xbt_barrier_wait…
-        - which makes xbt_mutex_* (simcall_mutex_*) and xbt_cond_*
-          (simcall_cond_*) operations.
-  - Some tests are expected to have deadlocks (?, AFAIU) but ISP do
-    not find them and neither do we:
-    - any_src-deadlock
-    - any_src-can-deadlock
-    - any_src-can-deadlock2
-    - any_src-can-deadlock3
+- The difference in terme of time is not so significant.
+- In the new version, soft-dirty is always faster. Previously, we
+  found that soft-dirty was slower.
+  - A difference is that, we now need to use syscalls in order to
+    read/write from the simulated process memory.
+  - We generate extra page faults but we avoid some syscalls and
+    remote-process memory accesses.
+**** Look at the ISP testsuite
+- http://formalverification.cs.utah.edu/ISP_Tests/
+- Some deadlocks are found by ISP but not by SimGridMC:
+  - mc-umpire-any_src-can-deadlock7
+  - mc-umpire-any_src-can-deadlock8
+  - mc-umpire-any_src-can-deadlock9
+  - mc-umpire-any_src-can-deadlock11
+  - mc-umpire-collective-misorder2
+  - mc-umpire-comm-bcast-deadlock
+  - mc-umpire-comm-deadlock
+  - mc-umpire-dropped-req
+- We find a deadlock in the main version but not in the modified
+  one:
+  - mc-umpire-any_src-can-deadlock4_mod
+  - mc-umpire-any_src-can-deadlock5_mod
+  - mc-umpire-any_src-can-deadlock6_mod
+  - mc-umpire-any_src-can-deadlock10_mod
+- ISP does not find a deadlock and we don't terminate:
+  - mc-umpire-irecv-isend-ok2
+    - ISP only finds one interleaving.
+    - We are lost in an ocean of interleavings.
+    - Still does not terminate if we remove the MPI_Barrier.
+    - Could it be related to MPI_Finalize?
+      - which makes a xbt_barrier_wait…
+      - which makes xbt_mutex_* (simcall_mutex_*) and xbt_cond_*
+        (simcall_cond_*) operations.
+- Some tests are expected to have deadlocks (?, AFAIU) but ISP do
+  not find them and neither do we:
+  - any_src-deadlock
+  - any_src-can-deadlock
+  - any_src-can-deadlock2
+  - any_src-can-deadlock3
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

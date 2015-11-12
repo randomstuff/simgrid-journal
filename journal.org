@@ -466,6 +466,7 @@ Tried the MacOS X prot:
 *** Work plannes [1/1]
 **** CANCELED SimGridMC on MacOS X without DWARF
 ** Week 14 September 2015
+*** Things done
 - Work on MacOS X without DWARF => canceled
 - Remove the intrusive base members in SURF: it seems MSVC like the
   member hooks better.
@@ -639,6 +640,35 @@ Tried the MacOS X prot:
   - any_src-can-deadlock
   - any_src-can-deadlock2
   - any_src-can-deadlock3
+** Week 09 November 2015
+***  Things done
+**** ptrace the model-checked application
+- This way we can detect the crash of the application and still get
+  its state at the moment of the crash.
+- But GDB cannot attach the model-checked application anymore. We
+  would have to either implement the GDB protocol in the model-checker
+  or PTRACE_DETACH it in order to let GDB PTRACE_ATTACH.
+**** Fix SMPI privatization in the model-checker
+- The support for SMPI privatization in split-process MC was still to
+  be done. The application did not switch to the correct privatization
+  segment when restoring the application state.
+**** Cleanup
+- Remove useless things from the single-process era.
+** Work Planned [0/1]
+*** TODO State comparison "broken"
+- Appeared after a fix of a off-by-one bug. This fix seems legit: we
+  are actually more correct now.
+- The liveness tests are broken as a result.
+- Probably a lot of work to cleanup/rewrite the state comparison code.
+*** TODO See why we explore a lot more interleavings than ISP
+- …even on simple test.
+- Try to understand a very simple test such as irecv-isend-ok. Why
+  does ISP explore only one interleaving of irecv-isend-ok and
+  SimGridMC explores loads of them? Even if we comment the MPI_Barrier
+  calls (and do not have any collectives).
+- Another difference is that ISP handles the collectives as one
+  operation whereas we tend to generate a lot of interleavings in the
+  collectives (but this does not explain those simple test cases).
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

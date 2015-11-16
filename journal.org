@@ -654,13 +654,13 @@ Tried the MacOS X prot:
   segment when restoring the application state.
 **** Cleanup
 - Remove useless things from the single-process era.
-** Work Planned [0/1]
-*** TODO State comparison "broken"
+*** Work Planned [0/1]
+**** TODO State comparison "broken"
 - Appeared after a fix of a off-by-one bug. This fix seems legit: we
   are actually more correct now.
 - The liveness tests are broken as a result.
 - Probably a lot of work to cleanup/rewrite the state comparison code.
-*** TODO See why we explore a lot more interleavings than ISP
+**** TODO See why we explore a lot more interleavings than ISP
 - …even on simple test.
 - Try to understand a very simple test such as irecv-isend-ok. Why
   does ISP explore only one interleaving of irecv-isend-ok and

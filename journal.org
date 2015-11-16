@@ -669,6 +669,62 @@ Tried the MacOS X prot:
 - Another difference is that ISP handles the collectives as one
   operation whereas we tend to generate a lot of interleavings in the
   collectives (but this does not explain those simple test cases).
+** Week 16 November 2015
+*** Things done
+**** Try to understand why we explore a lot more interleavings than ISP
+***** irecv-isend-ok
+- ISP: 1 interleaving (np=3, with barriers)
+- With DPOR:
+  np    barrier   #interleavings
+  ------------------------------
+  2           N                1
+  3           N                1
+  ------------------------------
+  2           Y                2
+  3           Y                6
+- Nothing relevant here.
+- The difference is related to the fact that ISP do not model-check
+  inside the collectives and we do.
+***** irecv-isend-ok2
+- ISP: 1 interleaving (np=3, req_count=20, with barriers)
+- req_count=1 is irecv-isend-ok
+- With DPOR:
+  np  req_count   barrier   #interleavings
+  ----------------------------------------
+  2           1         N                1
+  3           1         N                1
+  2           2         N                2
+  3           2         N                1
+  2           3         N                4
+  3           3         N                2
+  ----------------------------------------
+  2           1         Y                2
+  3           1         Y                6
+  2           2         Y                4
+  3           2         Y               12
+  2           3         Y                8
+  3           3         Y               24
+***** Simcall visibility (MC_request_is_visible):
+- Are considered visible:
+  - COMM_ISEND
+  - COMM_IRECV
+  - COMM_WAIT and COMM_WAITANY
+  - COMM_TEST and COMM_TESTANY
+  - MC_RANDOM
+  - MUTEX_LOCK and MUTEX_TRYLOCK
+- This program executes without interleaving:
+  - P1: ISEND(P2); WAIT();
+    P2: IRECV(P1); WAIT();
+- COMM_WAIT:
+  - Without reduction, I guess we could make COMM_WAIT execute as soon
+    as they are enabled (we do not need to interleave hem): they could
+    be considered invisible.
+  - With DPOR, this is not clear at all.
+  - COMM_WAIT timeouts needs to be interleaved.
+  - Note: COMM_WAIT without timeout is not co-enable with COMM_SEND or
+    COMME_RECV.
+***** Simcall independance (MC_request_depend)
+- used by DPOR to make the reduction
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

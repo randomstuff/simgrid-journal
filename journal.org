@@ -725,6 +725,30 @@ Tried the MacOS X prot:
     COMME_RECV.
 ***** Simcall independance (MC_request_depend)
 - used by DPOR to make the reduction
+** Week 23 November 2015
+*** Things done
+- Untangling the platform instanciation code and the XML processing
+  code:
+  - two layers of callbacks involved:
+    - sg_platf_foo_cb
+      - C-based
+      - apparently designed to be a SAX-like interfacee for the
+        processing the XML (platform/deployment) files
+    - fooCreatedCallbacks
+      - C++-based (boost::signals2 or libsig++)
+      - apparently designed to plug features in the simulator
+  - Problems:
+    - complicated
+    - many features/plugins are using the first interface and should
+      probably use the second one
+    - the ordering of the base callbacks is relevant (changing them
+      segfaults the application)
+  - Goal:
+    - move things to the C++ interface
+    - try to remove the C interface (and hardcode the SAX calls)
+    - try to hardcore the basic features of the C++ callbacks (their
+      order of execution cannot be changed anyway)
+    - have a nice API for the lua bindings
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

@@ -749,6 +749,14 @@ Tried the MacOS X prot:
     - try to hardcore the basic features of the C++ callbacks (their
       order of execution cannot be changed anyway)
     - have a nice API for the lua bindings
+  - A large part has been done. Some bits remainings.
+*** C++-ification of the context
+- This is currently OO (with vtables) implemented in C: use C++
+  classes and virtual methods to express the same thing.
+- Done: Thread, Boost, System V
+- Wip: Raw
+- TODO: Java
+- TODO?: CoJava
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

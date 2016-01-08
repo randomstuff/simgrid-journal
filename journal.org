@@ -727,8 +727,7 @@ Tried the MacOS X prot:
 - used by DPOR to make the reduction
 ** Week 23 November 2015
 *** Things done
-- Untangling the platform instanciation code and the XML processing
-  code:
+**** Untangling the platform instanciation code and the XML processing code
   - two layers of callbacks involved:
     - sg_platf_foo_cb
       - C-based
@@ -750,13 +749,46 @@ Tried the MacOS X prot:
       order of execution cannot be changed anyway)
     - have a nice API for the lua bindings
   - A large part has been done. Some bits remainings.
-*** C++-ification of the context
+**** C++-ification of the context
 - This is currently OO (with vtables) implemented in C: use C++
   classes and virtual methods to express the same thing.
 - Done: Thread, Boost, System V
 - Wip: Raw
 - TODO: Java
 - TODO?: CoJava
+** Week 15 December 2015
+*** Things done
+- Migration of MSG, Java bindings to C++
+  - This was necessary in order to be able to call the new C++ Host
+    API directly
+- Extendable plugin system to replace xbt_lib
+  - xbt_lib is confusing to use
+  - can be used to plug the different layers/plugins code
+- Creation of simgrid::Host for sg_host_t instead of using xbt_lib
+** Week 4 Januay 2015
+*** Things done
+- Move simcall directly in the Host methods:
+  - Using simgrid::simix::kernel() / RUN_KERNEL for simple ones
+    - removal of many simcalls merged into this one
+  - For more comples ones using: simgrid::simix::simcall()
+    - C++ templated function to issue a simcall
+*** Work Planned [0/4]
+**** TODO Rewrite the Energy plugin
+- use Extendable
+- better architecture
+**** TODO Remove layers of indirections in the simgrid::Host and rearchitecture
+- eg:
+  - host->setPstate(pstate_index) (simgrid::Host)
+  - ... calls SIMIX_host_set_pstate(host, pstate_index)
+  - ... calls surf_host_set_pstate(host, pstate_index)
+  - ... calls host->p_cpu->setPState(pstate_index)
+- have host::setPstate() call Cpu::setPstate() directly
+- either remove the intermediate calls or make delegate to Host::setPstate()
+**** TODO Avoid simcall for getter when possible in simgrid::Host
+Getters usually do not need to issue a simcall and could get the data directly.
+**** TODO Remove code from simgrid::surf::Host?
+- Remove simgrid::surd::Host?
+- Do we need this to make the disctinction bewteen the user API and the internal SURF API?
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

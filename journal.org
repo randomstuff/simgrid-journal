@@ -772,11 +772,11 @@ Tried the MacOS X prot:
     - removal of many simcalls merged into this one
   - For more comples ones using: simgrid::simix::simcall()
     - C++ templated function to issue a simcall
-*** Work Planned [0/4]
-**** TODO Rewrite the Energy plugin
+*** Work Planned [3/4]
+**** DONE Rewrite the Energy plugin
 - use Extendable
 - better architecture
-**** TODO Remove layers of indirections in the simgrid::Host and rearchitecture
+**** DONE Remove layers of indirections in the simgrid::Host and rearchitecture
 - eg:
   - host->setPstate(pstate_index) (simgrid::Host)
   - ... calls SIMIX_host_set_pstate(host, pstate_index)
@@ -784,11 +784,26 @@ Tried the MacOS X prot:
   - ... calls host->p_cpu->setPState(pstate_index)
 - have host::setPstate() call Cpu::setPstate() directly
 - either remove the intermediate calls or make delegate to Host::setPstate()
-**** TODO Avoid simcall for getter when possible in simgrid::Host
+**** DONE Avoid simcall for getter when possible in simgrid::Host
 Getters usually do not need to issue a simcall and could get the data directly.
 **** TODO Remove code from simgrid::surf::Host?
-- Remove simgrid::surd::Host?
-- Do we need this to make the disctinction bewteen the user API and the internal SURF API?
+- Remove simgrid::surf::Host?
+- Do we need this to make the distinction between the user API and the internal SURF API?
+** Week 14 Januay 2015
+*** Things done
+- Rewrite energy plugin (C++ style, using the extensions mechanism)
+- Fix segfault when compiling with optimisations
+- Cleanup/remove lots of intermediate/useless functions
+- Move signals out of surd::Host (into simgrid::Host)
+- Remove sg_platf_link_add_cb and sg_platf_postparse_add_cb
+- Merge simgrid::Host into simgrid::s4u::Host
+
+*** Work Planned [1/5]
+**** TODO simgrid::s4u::As*
+**** TODO work on Async
+- Have a common interface for execuions, comunications, disks, etc.
+**** TODO Cleanup surf::Link and its descendants
+**** TODO Cleanup addTrace()
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

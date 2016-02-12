@@ -765,7 +765,7 @@ Tried the MacOS X prot:
   - xbt_lib is confusing to use
   - can be used to plug the different layers/plugins code
 - Creation of simgrid::Host for sg_host_t instead of using xbt_lib
-** Week 4 Januay 2015
+** Week 4 Januay 2016
 *** Things done
 - Move simcall directly in the Host methods:
   - Using simgrid::simix::kernel() / RUN_KERNEL for simple ones
@@ -789,7 +789,7 @@ Getters usually do not need to issue a simcall and could get the data directly.
 **** TODO Remove code from simgrid::surf::Host?
 - Remove simgrid::surf::Host?
 - Do we need this to make the distinction between the user API and the internal SURF API?
-** Week 14 Januay 2015
+** Week 14 Januay 2016
 *** Things done
 - Rewrite energy plugin (C++ style, using the extensions mechanism)
 - Fix segfault when compiling with optimisations
@@ -797,13 +797,25 @@ Getters usually do not need to issue a simcall and could get the data directly.
 - Move signals out of surd::Host (into simgrid::Host)
 - Remove sg_platf_link_add_cb and sg_platf_postparse_add_cb
 - Merge simgrid::Host into simgrid::s4u::Host
-
 *** Work Planned [1/5]
 **** TODO simgrid::s4u::As*
 **** TODO work on Async
 - Have a common interface for execuions, comunications, disks, etc.
 **** TODO Cleanup surf::Link and its descendants
 **** TODO Cleanup addTrace()
+** Week 09 Febrary 2016
+*** Things done
+- Attach context: use the main thread as a simulated process.
+- Remove "smpi-run -foreground", it should now just work \o/
+- Fixing the MC:
+  - it was "broken" during the great refactoring of previous weeks;
+  - mc-bugged1-liveness-visited-ucontext is broken by a harmless commit (1e383d5);
+  - another commit (5524edc) was temporarily reverted because it was
+    breaking mc-bugged1-liveness-ucontext but the commit looks good;
+  - some changed lead to changed in the output of mc-bugged1-liveness-ucontext;
+  - this is not very stable.
+*** Work Planned
+**** TODO Rewrite/fix the MC state comparison code
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

@@ -816,6 +816,15 @@ Getters usually do not need to issue a simcall and could get the data directly.
   - this is not very stable.
 *** Work Planned
 **** TODO Rewrite/fix the MC state comparison code
+** Week 22 February 2016
+*** Things done
+- Fixed a huge regression/bug in MC: the contexts were not registered
+  in the MC anymore. It did not see any stack anymore.
+- Documentation of the MC code.
+- Cleanup of the MC code.
+- Port stack cleaner compiler-wrapper from Ruby to Python.
+- Fix testall again.
+- Remove useless #includes.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

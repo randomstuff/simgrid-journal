@@ -825,16 +825,24 @@ Getters usually do not need to issue a simcall and could get the data directly.
 - Port stack cleaner compiler-wrapper from Ruby to Python.
 - Fix testall again.
 - Remove useless #includes.
-** Week 29 Febryary 2016
+** Week 29 February 2016
 *** Things done
 - Port stack-cleaner/as from Ruby to Python. We don't have Ruby code
   anymore.
 - Cleanup/simplify the MC, remove unusedd stuff.
 - C++ification:
   - replace XBT containers with C++ ones.
-*** Work Planned [0/2]
-**** TODO Load DWARF from an external .so file
+*** Work Planned [1/2]
+**** DONE Load DWARF from an external .so file
 **** TODO C++ification
+** Week 7 March 2016
+*** Things done
+- Load DWARF from an external .so file using NT_GNU_BUILD_ID
+- Code cleanup/overhaul/documentation/C++-ification:
+  - move things in namespaces
+  - move things in classes
+  - use C++ containers/RAII instead of XBT
+- Fix preprocessor feature flags support
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

@@ -843,6 +843,19 @@ Getters usually do not need to issue a simcall and could get the data directly.
   - move things in classes
   - use C++ containers/RAII instead of XBT
 - Fix preprocessor feature flags support
+** Week 25 April 2016
+*** Things done
+- Cleanup configuration engine.
+- Implement our own minimal signal/slot implementation.
+** Week 02 May 2016
+*** Things done
+- Fix MC with the new SIMIX structures.
+- Cleanup, refactor the state comparison code.
+- C++-based configuration core.
+** Week 16 May 2016
+*** Things done
+- Work on the paper.
+- New S4U actor design.
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker

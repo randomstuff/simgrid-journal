@@ -856,6 +856,17 @@ Getters usually do not need to issue a simcall and could get the data directly.
 *** Things done
 - Work on the paper.
 - New S4U actor design.
+** Week 23 May 2016
+*** Work Planned [0/4]
+**** TODO New design for blocking simcalls
+**** TODO Work on S4U activities and plug them on the SIMIX/SURF ones
+- Create S4u activity objects providing the public API.
+- We plan to use value types for each s4u obejct.
+**** TODO Merge simcalls which could be done with C++ dynamic sipatch
+- such as the _wait
+- see https://github.com/simgrid/simgrid/commit/09a0b55d933dfe1b6c5e77c6e6b55be1b4e6da66
+- see simcall_comm_wait(smx_synchro_t comm, double timeout)
+**** TODO Move config into engine
 * Abbreviations
  - MC: model-checking, model-check
  - MCer: model-checker
